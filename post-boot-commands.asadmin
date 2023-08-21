@@ -1,0 +1,17 @@
+# Archivo: post-boot-commands.asadmin
+
+# Crear un pool de conexión JDBC
+create-jdbc-connection-pool --datasourceclassname org.postgresql.ds.PGSimpleDataSource --restype javax.sql.DataSource demo-pool
+
+# Configurar las propiedades del pool de conexión
+set resources.jdbc-connection-pool.demo-pool.property.password=LwDqhGGkam-PmYf-aZ5VM9148jkIt8L8
+set resources.jdbc-connection-pool.demo-pool.property.databaseName=zktwmeab
+set resources.jdbc-connection-pool.demo-pool.property.serverName=rajje.db.elephantsql.com
+set resources.jdbc-connection-pool.demo-pool.property.user=zktwmeab
+set resources.jdbc-connection-pool.demo-pool.property.portNumber=5432
+
+# Crear un recurso JDBC
+create-jdbc-resource --enabled=true --poolName=demo-pool --target=domain jdbc/local-db
+
+# Crear una referencia de recurso
+create-resource-ref --enabled=true --target=server jdbc/local-db
